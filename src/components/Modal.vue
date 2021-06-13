@@ -8,7 +8,7 @@
     <div class="modal"  :class="{'is-active': isOpen}">
       <div class="modal-content">
           <span @click="isOpen=false" class="close">&times;</span>
-          <p>modal window</p>
+          <slot />
       </div>
     </div>
 </div>
@@ -21,8 +21,10 @@
 export default {
    data() {
        return {
-           isOpen: false
+           isOpen: false , 
        }
+   },
+   methods: {
    },
   
 }
@@ -52,6 +54,7 @@ export default {
   padding:20px ;
   border: 1px solid #888;
   width: 80%;
+  text-align: left;
 }
 .close{
     color: #aaa;
@@ -60,13 +63,5 @@ export default {
     font-weight: bold;
     cursor: pointer;
 }
-.app-button {
-  font-size: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #795899;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
+
 </style>

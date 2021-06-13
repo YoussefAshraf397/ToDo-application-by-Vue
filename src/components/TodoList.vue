@@ -4,7 +4,7 @@
          v-for="todo in todos"
             :key="todo._id"
             :title="todo.title"
-            :description="todo.desciption"
+            :description="todo.description"
          />
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
 <style scoped>
 .todo-list{
     flex:1;
-    
+
 }
 </style>
 

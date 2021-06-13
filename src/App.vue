@@ -4,7 +4,7 @@
       <div class="todo-container">
        <TodoList :todos="todos"/>
         <div class="todo-create-btn-container">
-          <Modal  />
+          <TodoCreate  @formSubmitted="createTodo"/>
       </div>
       </div>
     </div>
@@ -15,13 +15,13 @@
 <script>
 import playground from './playground'
 import TodoList from '@/components/TodoList'
-import Modal from '@/components/Modal'
+import TodoCreate from '@/components/TodoCreate'
 
 export default {
   name: 'App',
   components: {
     TodoList,
-    Modal
+    TodoCreate
   },
 
   data() {
@@ -49,20 +49,28 @@ export default {
 
   created() {
   playground()
+},
+methods: {
+  createTodo(todo){
+  this.todos.push(todo)
 }
+},
+
 }
 
 </script>
 
-<style scoped>
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }
+
+
 
 .todo-container {
   display: flex;
@@ -87,6 +95,36 @@ width: 100%;
 
 .todo-create-btn-container{
   margin: 10px;
+}
+
+.app-button {
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #795899;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.is-primary{
+  background-color:#3cab3c ;
+}
+
+.label{
+    
+display: block;
+font-size: 18px;
+font-weight: bold;
+
+}
+.form-input{
+    padding: 10px;
+    font-size: 17px;
+}
+
+.form-control{
+    margin-bottom:10px ;
 }
 
 </style>
