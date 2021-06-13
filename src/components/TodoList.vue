@@ -26,3 +26,10 @@ export default {
 }
 </script>
 
+<style scoped>
+.todo-list{
+    flex:1;
+    
+}
+</style>
+
