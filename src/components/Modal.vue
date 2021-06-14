@@ -7,7 +7,7 @@
         </div>
     <div class="modal"  :class="{'is-active': isOpen}">
       <div class="modal-content">
-          <span @click="isOpen=false" class="close">&times;</span>
+          <span @click="closeModal" class="close">&times;</span>
           <slot />
       </div>
     </div>
@@ -25,7 +25,23 @@ export default {
        }
    },
    methods: {
+       closeModal(){
+           this.isOpen=false
+       }
    },
+   props:{
+       close: {
+           type: Boolean,
+           required: false
+       }
+   },
+   watch:{
+       close(isClose){
+           if(isClose && this.isOpen){
+               this.isOpen = false
+           }
+       }
+   }
   
 }
 </script>

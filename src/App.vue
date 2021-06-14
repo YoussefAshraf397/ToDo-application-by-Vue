@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import playground from './playground'
 import TodoList from '@/components/TodoList'
 import TodoCreate from '@/components/TodoCreate'
 
@@ -48,7 +47,6 @@ export default {
   },
 
   created() {
-  playground()
 },
 methods: {
   createTodo(todo){

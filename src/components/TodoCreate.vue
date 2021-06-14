@@ -1,5 +1,5 @@
 <template>
-    <Modal>
+    <Modal ref="modal" >
          <form class="app-form">
               <div class="form-control">
                   <label class="label">Title</label>
@@ -35,14 +35,31 @@ export default {
            form:{
                title: '',
                description: ''
-           }
+           },
+           forceClose: false
+       }
+   },
+   computed:{
+       isFormValid(){
+           return this.form.title && this.form.description ? true : false
+       },
+       modal(){
+           return this.$refs.modal
        }
    },
    methods: {
        submitForm(){
-           // eslint-disable-next-line vue/custom-event-name-casing
-           this.$emit('formSubmitted' , {...this.form})
-           this.resetForm()
+           if( this.isFormValid){
+            // eslint-disable-next-line vue/custom-event-name-casing
+            this.$emit('formSubmitted' , {...this.form})
+            this.modal.closeModal()
+
+            // this.forceClose=true
+            // this.$nextTick(() => this.forceClose=false)
+
+            this.resetForm()
+           }
+           
        },
        resetForm(){
            this.form.title=''
