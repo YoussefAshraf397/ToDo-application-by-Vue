@@ -15,7 +15,7 @@
 <script>
 import TodoList from '@/components/TodoList'
 import TodoCreate from '@/components/TodoCreate'
-
+import store from '@/store'
 export default {
   name: 'App',
   components: {
@@ -26,37 +26,23 @@ export default {
   data() {
     return {
       isOpenModal: false ,
-      todos:[
-        {
-          _id:"1",
-          title:"Test Title 1111",
-          description: "Test Description"
-        },
-         {
-          _id:"2",
-          title:"Test Title 2222222222",
-          description: "Test Description"
-        },
-         {
-          _id:"3",
-          title:"Test Title 3333333",
-          description: "Test Description"
-        },
-      ]
+      todos: store.state.todos
     }
-  },
+  },  
 
   created() {
 },
 methods: {
   createTodo(todo){
-  this.todos.push(todo)
+      //  store.dispatch('createTodo' , todo)
+      todo._id = Math.random().toString(36).substring(2,7)
+      this.todos.push(todo)
 }
 },
 
 }
 
-</script>
+</script> 
 
 <style >
 #app {
@@ -74,7 +60,7 @@ methods: {
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 500;
+  min-height: 200px;
   background-color:#ededed ;
   border-radius: 5px;
 }

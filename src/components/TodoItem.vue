@@ -11,9 +11,9 @@
                 <button 
                   @click="editMode=true"
                 class="app-button is-warning">Edit</button>
-               <!-- <button
+               <button
                   @click="deleteTodo" 
-               class="app-button is-danger">Delete</button> -->
+               class="app-button is-danger">Delete</button>
               </div>
             </div>
 
@@ -23,11 +23,13 @@
               <div class="form-control">
                   <label class="label">Title</label>
                   <input 
+                  v-model="todo.title"
                   class="form-input" type="text">
               </div>
                 <div class="form-control form-control-last">
                   <label class="label">Description</label>
-                  <textarea
+                  <textarea 
+                    v-model="todo.description"
                     cols="30"
                     rows="2"
                     class="form-input" >
@@ -35,11 +37,12 @@
               </div>
               <div class="todo-item-conetent-buttons" >
                 <button 
-                  @click="editMode=false"
+                  @click="editTodo"
+                  type="button"
                 class="app-button is-warning">Update</button>
                <button
-                  @click="deleteTodo" 
-               class="app-button is-danger">Delete</button>
+                  @click="editMode= false" 
+               class="app-button is-danger">Cancel</button>
               </div>
 
           </form>
@@ -49,7 +52,8 @@
 
 
 <script>
-
+import store from '@/store'
+// import Vue from 'vue'
 export default{
    props:{
        title:{
@@ -61,22 +65,42 @@ export default{
            type: String ,
             required: true,
             default: 'This is default description'
-
+       },
+       _id: {
+         type: String ,
+         required: true
        }
    },
    data() {
      return {
-       editMode: false
-     }
+       editMode: false ,
+       todo: {  
+         _id: this._id ,
+         title: this.title ,
+         description: this.description
+       },
+       
+      todoos: store.state.todos
+   
+   }
    },
    methods: {
      editTodo(){
-       alert('edit')
-
+      // store.dispatch('updateTodo' , {...this.todo})
+      const index = store.state.todos.findIndex((todo) => {
+          return todo._id === this.todo._id
+        })
+        this.todoos[index] = this.todo
+        this.editMode = false
      },
      deleteTodo(){
-       alert('delete')
-     }
+      // store.dispatch('deleteTodo', this.todo._id)
+      const index = store.state.todos.findIndex((todo) => {
+         return todo._id == this.todo._id
+      })
+
+      this.todoos.splice(index, 1)
+  }
    },
 }
 </script>
