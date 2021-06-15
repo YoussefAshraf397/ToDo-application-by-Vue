@@ -7,7 +7,7 @@
                   v-model="form.title"
                   class="form-input" type="text">
               </div>
-                <div class="form-control">
+                <div class="form-control form-control-last">
                   <label class="label">Description</label>
                   <textarea
                     v-model="form.description" 
@@ -15,6 +15,11 @@
                     rows="5"
                     class="form-input" >
                   </textarea>
+              </div>
+              <div class="app-error">
+                  <div class="form-error">
+                      {{formError}}
+                  </div>
               </div>
               <button 
               @click="submitForm"
@@ -36,8 +41,9 @@ export default {
                title: '',
                description: ''
            },
-           forceClose: false
-       }
+           formError: ''
+            
+           }
    },
    computed:{
        isFormValid(){
@@ -50,14 +56,14 @@ export default {
    methods: {
        submitForm(){
            if( this.isFormValid){
+            this.formError = ''
             // eslint-disable-next-line vue/custom-event-name-casing
             this.$emit('formSubmitted' , {...this.form})
             this.modal.closeModal()
-
-            // this.forceClose=true
-            // this.$nextTick(() => this.forceClose=false)
-
             this.resetForm()
+           }
+           else{
+               this.formError = 'From Error! title and description is required'
            }
            
        },
@@ -72,5 +78,7 @@ export default {
 </script>
 
 <style scoped>
-
+.form-error{
+    margin-bottom: 10px;
+}
 </style>

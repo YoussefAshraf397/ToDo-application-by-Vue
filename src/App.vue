@@ -74,7 +74,7 @@ methods: {
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 400px;
+  height: 500;
   background-color:#ededed ;
   border-radius: 5px;
 }
@@ -108,6 +108,13 @@ width: 100%;
 .is-primary{
   background-color:#3cab3c ;
 }
+.is-warning{
+  background-color:#ffa753 ;
+  margin-right: 5px;
+}
+.is-danger{
+  background-color:#ff5a5a ;
+}
 
 .label{
     
@@ -123,6 +130,13 @@ font-weight: bold;
 
 .form-control{
     margin-bottom:10px ;
+}
+.app-error{
+  color: red;
+}
+
+.form-control-last{
+  margin-bottom:0px ;
 }
 
 </style>
